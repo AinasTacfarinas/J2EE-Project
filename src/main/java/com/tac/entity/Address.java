@@ -1,20 +1,24 @@
 package com.tac.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ADDRESS")
 public class Address {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String street;
-	private String city;
-	private String country;
-	private Contact contact;
 	
-	public Contact getContact() {
-		return contact;
-	}
-
-	public void setContact(Contact contact) {
-		this.contact = contact;
-	}
+	private String street;
+	
+	private String city;
+	
+	private String country;
 
 	public Address() {}
 	

@@ -9,17 +9,37 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
- <servlet>
+  <servlet>
     <description></description>
     <display-name>CreateContact</display-name>
     <servlet-name>CreateContact</servlet-name>
     <servlet-class>com.tac.servlet.CreateContactServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
     <servlet-name>CreateContact</servlet-name>
     <url-pattern>/CreateContact</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>SearchContact</display-name>
+    <servlet-name>SearchContact</servlet-name>
+    <servlet-class>com.tac.servlet.SearchContactServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchContact</servlet-name>
+    <url-pattern>/SearchContact</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>UpdateContact</display-name>
+    <servlet-name>UpdateContact</servlet-name>
+    <servlet-class>com.tac.servlet.UpdateContactServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateContact</servlet-name>
+    <url-pattern>/UpdateContact</url-pattern>
+  </servlet-mapping>  
   
 </web-app>

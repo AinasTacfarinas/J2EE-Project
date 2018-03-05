@@ -1,45 +1,53 @@
 package com.tac.entity;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import net.bytebuddy.dynamic.TypeResolutionStrategy.Lazy;
+
 
 
 @Entity
 @Table(name = "CONTACT")
-public class Contact implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+public class Contact{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CONTACT_ID")
 	private long contact_id;
 	
-	@Column(name = "FIRSTNAME")
 	private String firstName;
 	
-	@Column(name = "LASTNAME")
 	private String lastName;
 	
-	@Column(name = "EMAIL")
 	private String email;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	private Set<PhoneNumber> phoneNumbers;
+	
+	
+	@OneToOne(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	private Address address;
 	
 	/*
 	private Set<ContactGroup> groups;
-	private Set<PhoneNumber> phoneNumbers;
-	private Address address;
 	*/
 	
 	public Contact() {}
@@ -49,7 +57,7 @@ public class Contact implements Serializable{
 		this.lastName = lastname;
 		this.email = email;
 		//this.groups = new HashSet<ContactGroup>();
-		//this.phoneNumbers = new HashSet<PhoneNumber>();
+		this.phoneNumbers = new HashSet<PhoneNumber>();
 	}
 	
 
@@ -86,16 +94,6 @@ public class Contact implements Serializable{
 		this.email = email;
 	}
 	
-	/*
-	
-	public void setGroups(Set<ContactGroup> groups) {
-		this.groups = groups;
-	}
-	
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	
 	public Set<PhoneNumber> getPhoneNumbers() {
 		return phoneNumbers;
 	}
@@ -104,12 +102,27 @@ public class Contact implements Serializable{
 		this.phoneNumbers = phones;
 	}
 	
-	public Set<ContactGroup> getGroups() {
-		return this.groups;
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	
 	public Address getAddress() {
 		return this.address;
 	}
+	
+	/*
+	
+	public void setGroups(Set<ContactGroup> groups) {
+		this.groups = groups;
+	}
+	
+	
+	
+	
+	public Set<ContactGroup> getGroups() {
+		return this.groups;
+	}
+	
+	
 	*/
 }

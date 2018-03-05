@@ -1,0 +1,5 @@
+mysql -u root
+create database tacDataBase;
+create user 'tac'@'localhost';
+grant all privileges on tacDataBase.* to 'tac'@'localhost';
+use tacDataBase

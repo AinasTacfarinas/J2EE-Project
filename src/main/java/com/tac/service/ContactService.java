@@ -7,13 +7,13 @@ import com.tac.dao.IDAOContact;
 import com.tac.entity.Contact;
 
 public class ContactService {
-	public IDAOContact dao;
+	private IDAOContact dao;
 	public ContactService() {
 		dao = new DAOContact();
 	}
 
-	public Contact createContact(String firstname,String lastname,String email){
-		return dao.createContact(new Contact(firstname, lastname, email));
+	public Contact createContact(Contact c){
+		return dao.createContact(c);
 	}
 	
 	public boolean deleteContactById(long id) {
@@ -22,32 +22,34 @@ public class ContactService {
 	
 	
 	public ArrayList<Contact> getContacts(){
-		DAOContact daoContact = new DAOContact();
-		return daoContact.searchAllContact();
+		return dao.searchAllContact();
+	}
+	
+	
+	
+	public Contact getContactById(long id){
+		return dao.searchContactById(id);
+	}
+	
+	
+	
+	public Contact updateContact(Contact c) {	
+		
+		return dao.updateContact(c);
+		
 	}
 	
 	/*
-	
-	public Contact getContactById(long id){
-		DAOContact daoContact = new DAOContact();
-		
-		
-		return daoContact.searchContactById(id);
-	}
-
-	public boolean updateContact(Contact c) {
-		
-		DAOContact daoContact = new DAOContact();
-		
-		
-		return daoContact.updateContact(c);
-		
-	}
-	
 	public ArrayList<Contact> getSearchContact(String fname, String lname, String mail) {
 		// TODO Auto-generated method stub
 		DAOContact daoContact = new DAOContact();
 		return daoContact.searchContact(fname,lname,mail);
 	}
 	*/
+	
+	public ArrayList<Contact> getSearchAllContact() {
+		// TODO Auto-generated method stub
+		DAOContact daoContact = new DAOContact();
+		return daoContact.searchAllContact();
+	}
 }

@@ -34,7 +34,7 @@
   
    <div>
   	<label for="POST-NUMBER">Numero de telephone :</label>
-  	<input id="POST-NUMBER" type="text" name="number"><br>
+  	<input id="POST-NUMBER" type="text" name="phonenumber"><br>
   </div>
   
   <div>

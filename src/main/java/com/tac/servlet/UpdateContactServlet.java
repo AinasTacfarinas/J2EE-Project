@@ -1,7 +1,7 @@
 package com.tac.servlet;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,24 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.tac.entity.Address;
 import com.tac.entity.Contact;
 import com.tac.entity.PhoneNumber;
-import com.tac.service.AddressService;
 import com.tac.service.ContactService;
-import com.tac.service.PhoneNumberService;
+import com.tac.util.HibernateUtil;
 
 /**
- * Servlet implementation class CreateContactServlet
+ * Servlet implementation class UpdateContactServlet
  */
-@WebServlet(name = "CreateContact", urlPatterns = { "/CreateContact" })
-public class CreateContactServlet extends HttpServlet {
+@WebServlet(name = "UpdateContact", urlPatterns = { "/UpdateContact" })
+public class UpdateContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateContactServlet() {
+    public UpdateContactServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,37 +34,26 @@ public class CreateContactServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String firstname = request.getParameter("firstname");
-		String lastname = request.getParameter("lastname");
-		String email = request.getParameter("email");
-		String phonenumber = request.getParameter("phonenumber");
-		String street = request.getParameter("street");
-		String city = request.getParameter("city");
-		String country = request.getParameter("country");
 		
-		PhoneNumber pn = new PhoneNumber();
-		pn.setNumber(phonenumber);
-		HashSet<PhoneNumber> ht = new HashSet<PhoneNumber>();
-		
-		Contact c = new Contact();
-		c.setEmail(email);
-		c.setFirstName(firstname);
-		c.setLastName(lastname);
-		
-		Address a = new Address();
-		a.setCity(city);
-		a.setCountry(country);
-		a.setStreet(street);
-		
-		pn.setContact(c);
-		
-		ht.add(pn);
-		c.setAddress(a);
-		c.setPhoneNumbers(ht);
 		ContactService cs = new ContactService();
-		cs.createContact(c);
+		Contact c = (Contact) cs.getContactById(Integer.parseInt(request.getParameter("id")));
+		if(c==null){
+			System.out.println("LE CONTACT N'EXISTE PAS ??");
+		}
+
+		c.setEmail(request.getParameter("email"));
+		c.setFirstName(request.getParameter("firstname"));
+		c.setLastName(request.getParameter("lastname"));
 		
+		Iterator<PhoneNumber> it = c.getPhoneNumbers().iterator();
+		
+		
+		
+		
+		cs.updateContact(c);
+
 		getServletContext().getRequestDispatcher("/index.html").forward(request, response);
+		
 	}
 
 	/**

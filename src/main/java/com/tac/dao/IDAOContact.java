@@ -10,7 +10,9 @@ public interface IDAOContact{
 	
 	public boolean removeContact(long id);
 	
-	public Contact updateContact(long id, String firstname, String lastname, String email);
+	public Contact updateContact(Contact c);
 
 	public  ArrayList<Contact> searchAllContact();
+
+	public Contact searchContactById(long id);
 }
