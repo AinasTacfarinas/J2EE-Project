@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,6 +21,7 @@ public class PhoneNumber {
 	private String number;
 	
 	@ManyToOne
+	@JoinColumn(name = "contact_id", nullable = true)
 	private Contact contact;
 	
 	public PhoneNumber() {
@@ -30,8 +32,6 @@ public class PhoneNumber {
 		contact = null;
 		this.number = number;
 	}
-	
-	
 	
 	@Override
 	public int hashCode() {
@@ -80,6 +80,10 @@ public class PhoneNumber {
 	
 	public void setNumber(String number) {
 		this.number = number;
+	}
+	
+	public String toString() {
+		return number+" ";
 	}
 	
 }

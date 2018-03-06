@@ -40,7 +40,6 @@ public class Address {
 		return this.city;
 	}
 	
-	
 	public void setAddressID(long id) {
 		this.id = id;
 	}

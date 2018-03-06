@@ -2,6 +2,7 @@ package com.tac.servlet;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.tac.entity.Address;
 import com.tac.entity.Contact;
+import com.tac.entity.ContactGroup;
 import com.tac.entity.PhoneNumber;
 import com.tac.service.AddressService;
 import com.tac.service.ContactService;
@@ -28,6 +30,7 @@ public class CreateContactServlet extends HttpServlet {
      */
     public CreateContactServlet() {
         super();
+       
         // TODO Auto-generated constructor stub
     }
 
@@ -43,6 +46,7 @@ public class CreateContactServlet extends HttpServlet {
 		String street = request.getParameter("street");
 		String city = request.getParameter("city");
 		String country = request.getParameter("country");
+		String group = request.getParameter("groupname");
 		
 		PhoneNumber pn = new PhoneNumber();
 		pn.setNumber(phonenumber);
@@ -58,11 +62,19 @@ public class CreateContactServlet extends HttpServlet {
 		a.setCountry(country);
 		a.setStreet(street);
 		
+		ContactGroup cg = new ContactGroup(group);
+		cg.getContacts().add(c);
+		Set<ContactGroup> scg = c.getGroups();
+		scg.add(cg);
+		
 		pn.setContact(c);
 		
 		ht.add(pn);
 		c.setAddress(a);
 		c.setPhoneNumbers(ht);
+		
+		
+		
 		ContactService cs = new ContactService();
 		cs.createContact(c);
 		

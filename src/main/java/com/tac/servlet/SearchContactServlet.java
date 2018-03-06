@@ -3,6 +3,7 @@ package com.tac.servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tac.entity.Contact;
+import com.tac.entity.ContactGroup;
+import com.tac.service.ContactGroupService;
 import com.tac.service.ContactService;
 
 /**
@@ -59,6 +62,9 @@ public class SearchContactServlet extends HttpServlet {
 				String[] res = e.getKey().split("\\.");
 				if(res[0].equals("modif")){
 					request.setAttribute("contactToModify",l.get(Integer.parseInt(res[1])));
+					ContactGroupService cgs = new ContactGroupService();
+					Set<ContactGroup> cg= cgs.getContactGroups();
+					request.setAttribute("AllGroups", cg);
 					getServletContext().getRequestDispatcher("/Form/Detail/DetailContact.jsp").forward(request, response);
 					return;
 				}else{
@@ -74,8 +80,6 @@ public class SearchContactServlet extends HttpServlet {
 			
 		}
 
-		
-		
 		getServletContext().getRequestDispatcher("/Form/Search/SearchContact.jsp").forward(request, response);
 		
 		

@@ -50,12 +50,38 @@
 						out.println("<input id=\"POST-PHONENUMBER\" value=\"" + it.next().getNumber()+ "\" type=\"text\" name=\"phonenumber"+(i++)+"\"><br>");
 					}
 					
-					
-					
 				}
 				out.println("<label for=\"POST-PHONENUMBER\">Nouveau Numero :</label>");
 				out.println("<input id=\"POST-PHONENUMBER\" value=\"\" type=\"text\" name=\"newphonenumber\"><br>");
 				out.println(" </div>");
+				
+				Set<ContactGroup> hs2 = c.getGroups();
+				Set<ContactGroup> allcg = (Set<ContactGroup>)request.getAttribute("AllGroups");
+				Iterator<ContactGroup> it2 = hs2.iterator();
+				int i=0;
+				out.print("Groups : ");
+				while(it2.hasNext()){
+					ContactGroup cg = it2.next();
+					Iterator<ContactGroup> itemp = allcg.iterator();
+					while(itemp.hasNext()){
+						ContactGroup cgtmp = itemp.next();
+						if(cgtmp.getGroupName().equals(cg.getGroupName())){
+							itemp.remove();
+						}
+					}
+					
+					out.print("<input type=\"checkbox\" name=\"groups\" checked=\"checked\" value=\""+cg.getGroupName()+"\">"+cg.getGroupName());
+				}
+				Iterator<ContactGroup> it = allcg.iterator();
+				
+				while(it.hasNext()){
+					ContactGroup cg = it.next();
+					out.print("<input type=\"checkbox\" name=\"groups\" value=\""+cg.getGroupName()+"\">"+cg.getGroupName());
+				}
+				
+				out.println("<br><label for=\"POST-GROUPNAME\">ADD NEW GROUPNAME : </label>");
+				out.println("<input id=\"POST-GROUPNAME\" type=\"text\" name=\"groupnamenew\"><br>");
+				
 				
 				out.println("<div>");
 				out.println("<input type=\"submit\" value=\"submit\">");

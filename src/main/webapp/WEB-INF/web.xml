@@ -19,7 +19,6 @@
     <servlet-name>CreateContact</servlet-name>
     <url-pattern>/CreateContact</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>SearchContact</display-name>
@@ -30,7 +29,6 @@
     <servlet-name>SearchContact</servlet-name>
     <url-pattern>/SearchContact</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>UpdateContact</display-name>
@@ -40,6 +38,17 @@
   <servlet-mapping>
     <servlet-name>UpdateContact</servlet-name>
     <url-pattern>/UpdateContact</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>CreateContactGroup</display-name>
+    <servlet-name>CreateContactGroup</servlet-name>
+    <servlet-class>com.tac.servlet.CreateContactGroupServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateContactGroup</servlet-name>
+    <url-pattern>/CreateContactGroup</url-pattern>
+  </servlet-mapping>
   
 </web-app>
