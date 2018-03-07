@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,13 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-
-import net.bytebuddy.dynamic.TypeResolutionStrategy.Lazy;
 
 
 
@@ -46,7 +38,12 @@ public class Contact{
 	@OneToOne(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
 	private Address address;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL}, mappedBy = "contacts")
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@JoinTable (
+		       name="CONTACTGROUP_CONTACT",
+		       joinColumns = {@JoinColumn(name="contactgroup_id")},
+		       inverseJoinColumns = {@JoinColumn(name="contact_id")}
+		   )
 	private Set<ContactGroup> groups;
 	
 	public Contact() {

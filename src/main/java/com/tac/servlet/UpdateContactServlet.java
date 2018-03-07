@@ -100,7 +100,7 @@ public class UpdateContactServlet extends HttpServlet {
 
 		Set<ContactGroup> scg = c.getGroups();
 
-		/*
+		
 		Iterator<ContactGroup> it = scg.iterator();
 
 		while(it.hasNext()) {
@@ -122,26 +122,7 @@ public class UpdateContactServlet extends HttpServlet {
 				it.remove();
 			}
 		}
-		 */
 
-		for(ContactGroup cg : scg) {
-			boolean b = false;
-			for(int i=0;i<checkedGroups.length;i++) {
-
-				if(cg.getName().equals(checkedGroups[i])) {
-					b = true;
-					break;
-				}
-
-			}
-
-			if(!b) {
-
-				boolean az = cg.getContacts().remove(c);
-				System.out.println("ALLO "+az);
-				scg.remove(cg);
-			}
-		}
 
 		scg.stream().forEach(e->System.out.println(e.getName()));
 

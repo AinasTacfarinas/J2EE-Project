@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -23,12 +21,7 @@ public class ContactGroup {
 	
 	private String name;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable (
-		       name="CONTACTGROUP_CONTACT",
-		       joinColumns = {@JoinColumn(name="contact_id")},
-		       inverseJoinColumns = {@JoinColumn(name="contactgroup_id")}
-		   )
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
 	Set<Contact> contacts;
 	
 	public ContactGroup() {}
